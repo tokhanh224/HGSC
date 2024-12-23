@@ -20,6 +20,7 @@ const Product = () => {
     });
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, [productId]);
   return productData ? (
