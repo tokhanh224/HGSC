@@ -3,9 +3,10 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
+import { toast } from "react-toastify"; // Thêm import toast
 
 const Cart = () => {
-  const { products, currency, cartItems,updateQuantity } = useContext(ShopContext);
+  const { products, currency, cartItems, updateQuantity } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
@@ -23,6 +24,15 @@ const Cart = () => {
     }
     setCartData(tempData);
   }, [cartItems]);
+
+  // Hàm xử lý xóa sản phẩm
+  const handleRemove = (itemId, size) => {
+    const productData = products.find((product) => product._id === itemId);
+    updateQuantity(itemId, size, 0);
+    if (productData) {
+      toast.info(`${productData.name} (Size: ${size}) has been removed from your cart.`);
+    }
+  };
 
   return (
     <div className="border-t pt-14">
@@ -69,16 +79,25 @@ const Cart = () => {
                 type="number"
                 min={1}
                 defaultValue={item.quantity}
-                onChange={(e) => e.target.value === ''|| e.target.value === '0'? null : updateQuantity(item._id, item.size, Number(e.target.value))}
+                onChange={(e) =>
+                  e.target.value === "" || e.target.value === "0"
+                    ? null
+                    : updateQuantity(item._id, item.size, Number(e.target.value))
+                }
               />
-              <img onClick={() => updateQuantity(item._id, item.size,0)} className="w-4 mr-4 sm:w-5 cursor-pointer" src={assets.bin_icon} alt="" />
+              <img
+                onClick={() => handleRemove(item._id, item.size)} // Sử dụng hàm xử lý xóa
+                className="w-4 mr-4 sm:w-5 cursor-pointer"
+                src={assets.bin_icon}
+                alt=""
+              />
             </div>
           );
         })}
       </div>
       <div className="flex justify-end my-20">
         <div className="w-full sm:w-[450px]">
-          <CartTotal/>
+          <CartTotal />
         </div>
       </div>
     </div>
