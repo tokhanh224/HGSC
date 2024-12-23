@@ -24,12 +24,42 @@ a.active hr{
     color: white;
   }
 }
-.header {
-  position: sticky; 
+/* Đảm bảo sidebar được hiển thị đầy đủ khi visible */
+.header-pc .sidebar {
+  position: absolute;
   top: 0;
-  z-index: 1000; 
-  background-color: white; 
+  right: 0;
+  bottom: 0;
+  background: white;
+  overflow-y: auto;
+  transition: width 0.3s ease;
 }
+
+/* Khi visible = true */
+.header-pc .sidebar.visible {
+  width: 100%; /* Hoặc điều chỉnh theo thiết kế */
+}
+
+/* Khi visible = false */
+.header-pc .sidebar {
+  width: 0;
+}
+
+/* Nội dung bên trong sidebar */
+.header-pc .sidebar .menu-item {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-pc .sidebar .menu-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.header-pc .sidebar .menu-item:hover a {
+  color: #000;
+}
+
 .footer{
   background-color: darkseagreen;
 }
