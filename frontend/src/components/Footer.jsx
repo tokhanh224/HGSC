@@ -1,9 +1,11 @@
 import React from "react";
 import { assets } from "../assets/assets";
-
+import ScrollToTop from "react-scroll-to-top";
+import CustomScrollToTop from "./CustomScrollToTop";
 const Footer = () => {
   return (
     <div>
+      < CustomScrollToTop/>
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm ">
         <div>
           <img src={assets.logo} className="mb-5 w-32" alt="" />
@@ -32,7 +34,7 @@ const Footer = () => {
       <div>
         <hr />
         <p className="py-5 text-sm text-center footer">
-        © 2024 Copyright - All Right Reserved.
+          © 2024 Copyright - All Right Reserved.
         </p>
       </div>
     </div>
